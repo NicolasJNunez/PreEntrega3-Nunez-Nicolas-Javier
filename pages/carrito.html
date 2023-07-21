@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="sweetalert2.min.css">
+  <script defer src="../js/main.js"></script>
+  <title>Carrito</title>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1><a href="../index.html">FrescoMart</a></h1>
+      <span id="element2"></span>
+    </div>
+    <figure>
+      <a href="../index.html"><img class="carrito" src="../img/volver.png" alt="Icono de volver"></a>
+      <figcaption>VOLVER</figcaption>
+    </figure>
+  </header>
+  <main>
+      <h2>Sus productos:</h2>
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Importe</th>
+            <th>Quitar</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <div class="cont-msj-error"></div>
+    </section>
+    <div>
+      <svg class="waves" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(9, 95, 165, 0.7)" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(9, 95, 165, 0.5)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(9, 95, 165, 0.3)" />
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="rgb(9, 95, 165)" />
+        </g>
+      </svg>
+    </div>
+  </main>
+  <footer>
+    <div>
+      <h2>Nicolás Javier Núñez</h2>
+    </div>
+    <h3><span>Comisión:</span> JavaScript 43130</h3>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <script>
+    let typingEffect2 = new Typed("#element2", {
+      strings: ["Almacén", "Quiosco", "Mercado", "Rotiseria"],
+      loop: true,
+      typeSpeed: 100,
+      backSpeed: 80,
+      startDelay: 800,
+      backDelay: 800
+    })
+  </script>
+</body>
+
+</html>

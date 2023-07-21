@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/styles.css">
+  <script defer src="./js/main.js"></script>
+  <script defer src="./js/buscador.js"></script>
+  <script defer src="./js/popup.js"></script>
+  <title>Pre Entrega 2 - Núñez</title>
+</head>
+
+<body>
+
+  <header>
+    <div>
+      <h1>FrescoMart</h1>
+      <span id="element"></span>
+    </div>
+    <figure>
+      <a href="./pages/carrito.html" class="carrito-link">
+        <img class="carrito" src="./img/carrito.png" alt="un canasto de compras rojo">
+        <span class="carrito-cantidad" id="carritoCantidad"></span>
+      </a>
+      <figcaption>CARRITO</figcaption>
+    </figure>
+  </header>
+
+  <main>
+    <div id="popup-container">
+      <div id="popup">
+        <img src="./img/20off.png" alt="Anuncio" />
+        <button id="close-button">&times;</button>
+      </div>
+    </div>
+    <h2>✦ Conocé nuestra <b>amplia</b> variedad de productos</h2>
+    <div class="cont-h3">
+      <h3>Hoy tenemos un <span class="compr">20%</span> de <strong class="descu">descuento</strong> en
+        <b>tacos, hamburguesas y pizzas</b> ¡No te lo podes perder!
+      </h3>
+    </div>
+    <form action="">
+      <label for="buscador">Buscador:</label>
+      <input type="search" id="buscador" placeholder="Escribe aquí...">
+    </form>
+    <div class="contenedor"></div>
+
+    <div>
+      <svg class="waves" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(9, 95, 165, 0.7)" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(9, 95, 165, 0.5)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(9, 95, 165, 0.3)" />
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="rgb(9, 95, 165)" />
+        </g>
+      </svg>
+    </div>
+
+  </main>
+
+  <footer>
+    <div>
+      <h2>Nicolás Javier Núñez</h2>
+    </div>
+    <h3><span>Comisión:</span> JavaScript 43130</h3>
+  </footer>
+
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <script>
+    let typingEffect = new Typed("#element", {
+      strings: ["Almacén", "Quiosco", "Mercado", "Rotiseria"],
+      loop: true,
+      typeSpeed: 100,
+      backSpeed: 80,
+      startDelay: 800,
+      backDelay: 800
+    })
+  </script>
+</body>
+
+</html>
