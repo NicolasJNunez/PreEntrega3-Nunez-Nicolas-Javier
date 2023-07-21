@@ -183,6 +183,7 @@ function listarProductosEnCarritoHTML(comida) {
   `;
 }
 
+
 // Función para remover un producto del carrito
 function removerProducto(identificacion) {
   CARRITO = CARRITO.filter((producto) => producto.identificacion !== identificacion);
@@ -232,18 +233,18 @@ function armarCarrito() {
     });
 
     // Calcular el total de la compra usando .reduce
-    const totalCompra = CARRITO.reduce((total, comida) => total + comida.precio, 0);
+    const totalCompra = CARRITO.reduce((total, comida) => total + (comida.precio * (["Hamburguesa", "Taco", "Pizza"].includes(comida.nombre) ? 0.8 : 1)), 0);
 
     // Agregar la fila con el total al final de la tabla
     TABLE_BODY.innerHTML += `
-          <tr class="total">
-            <td colspan="2"><strong>Total:</strong></td>
-            <td>$${totalCompra.toLocaleString()}</td>
-            <td></td>
-          </tr>
-        `;
+      <tr class="total">
+        <td colspan="2"><strong>Total:</strong></td>
+        <td>$${totalCompra.toLocaleString()}</td>
+        <td></td>
+      </tr>
+    `;
 
-    // Verificar si el botón "Vaciar Carrito" ya existe
+    // Verificar si el botón "Vaciar Carrito" ya existe para agregar el boton de vaciar carrito y comprar
     const VACIAR_CARRITO_BTN = document.querySelector('#vaciarCarrito');
     if (!VACIAR_CARRITO_BTN) {
       TABLE.insertAdjacentHTML('afterend', `${agregarBotonVaciarCarritoYComprar()}`);
@@ -252,7 +253,6 @@ function armarCarrito() {
 
     document.querySelector('table').style.display = 'block';
 
-    // Agregar eventos a los botones de remover producto
     agregarEventosRemoverProducto();
   } else {
     DIV_ERROR.innerHTML += MostrarMsjCarritoVacio();
@@ -266,6 +266,7 @@ function armarCarrito() {
     document.querySelector('table').style.display = 'none';
   }
 }
+
 
 // Mostrar el contenido inicial del carrito
 armarCarrito();
