@@ -1,3 +1,5 @@
+
+
 // ---------------------------------INDEX.HTML---------------------------------
 
 // Clase constructora de comidas
@@ -97,10 +99,6 @@ function activarClickEnBotones() {
   });
 }
 
-function aplicarDescuento() {
-
-}
-
 // Cargar productos en el contenedor y activar los eventos de click en los botones
 if (CONTAINER) {
   cargarProductos(ARRAY_DE_COMIDAS);
@@ -159,16 +157,11 @@ const DIV_ERROR = document.querySelector(`.cont-msj-error`)
 
 // Función para listar los productos en la tabla
 function listarProductosEnCarritoHTML(comida) {
-  // Verificar si el producto es una hamburguesa, taco o pizza
   const esProductoConDescuento = ["Hamburguesa", "Taco", "Pizza"].includes(comida.nombre);
-
-  // Calcular el precio con descuento si aplica
   let precioConDescuento = comida.precio;
   if (esProductoConDescuento) {
-    precioConDescuento *= 0.8; // 20% de descuento
+    precioConDescuento *= 0.8;
   }
-
-  // Crear la fila de la tabla con el precio tachado y el precio con descuento
   return `
     <tr>
       <td>${comida.imagen}</td>
@@ -226,15 +219,12 @@ function MostrarMsjCarritoVacio() {
 function armarCarrito() {
   TABLE_BODY.innerHTML = ``;
   DIV_ERROR.innerHTML = ``;
-
   if (CARRITO.length > 0) {
     CARRITO.forEach((comida) => {
       TABLE_BODY.innerHTML += listarProductosEnCarritoHTML(comida);
     });
-
-    // Calcular el total de la compra usando .reduce
+    // Calcular el total de la compra
     const totalCompra = CARRITO.reduce((total, comida) => total + (comida.precio * (["Hamburguesa", "Taco", "Pizza"].includes(comida.nombre) ? 0.8 : 1)), 0);
-
     // Agregar la fila con el total al final de la tabla
     TABLE_BODY.innerHTML += `
       <tr class="total">
@@ -243,30 +233,24 @@ function armarCarrito() {
         <td></td>
       </tr>
     `;
-
-    // Verificar si el botón "Vaciar Carrito" ya existe para agregar el boton de vaciar carrito y comprar
+    // Verificar si el botón "Vaciar Carrito" no existe para agregar el boton de vaciar carrito y el boton de comprar
     const VACIAR_CARRITO_BTN = document.querySelector('#vaciarCarrito');
     if (!VACIAR_CARRITO_BTN) {
       TABLE.insertAdjacentHTML('afterend', `${agregarBotonVaciarCarritoYComprar()}`);
       document.querySelector('#vaciarCarrito').addEventListener('click', vaciarCarrito);
     }
-
     document.querySelector('table').style.display = 'block';
-
     agregarEventosRemoverProducto();
   } else {
     DIV_ERROR.innerHTML += MostrarMsjCarritoVacio();
-
-    // Verificar si el botón "Vaciar Carrito" ya existe
     const VACIAR_CARRITO_BTN = document.querySelector('#vaciarCarrito');
     if (VACIAR_CARRITO_BTN) {
       VACIAR_CARRITO_BTN.remove();
+      BOTON_COMPRAR.remove();
     }
-
     document.querySelector('table').style.display = 'none';
   }
 }
-
 
 // Mostrar el contenido inicial del carrito
 armarCarrito();
@@ -283,7 +267,6 @@ function vaciarCarrito() {
 }
 
 const BOTON_COMPRAR = document.querySelector("#comprar");
-
   BOTON_COMPRAR.addEventListener("click", () => {
     Swal.fire(
       '<span class="sweet">Compra realizada</span>',
@@ -291,5 +274,3 @@ const BOTON_COMPRAR = document.querySelector("#comprar");
       'success'
     )
   })
-
-
