@@ -1,3 +1,5 @@
+// Popup 20% descuento Hamburguesas, tacos y pizzas
+
 document.addEventListener('DOMContentLoaded', () => {
   const MOSTRAR_POPUP = sessionStorage.getItem('popupShown');
 

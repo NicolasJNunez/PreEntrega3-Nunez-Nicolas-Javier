@@ -1,3 +1,5 @@
+// Buscador (search input)
+
 const BUSCADOR = document.querySelector(`input#buscador`);
 
 function filtrarProductos() {

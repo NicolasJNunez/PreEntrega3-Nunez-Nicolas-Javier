@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Función para mostrar mensaje en la esquina inferior derecha "producto agregado"
+// Función para mostrar mensaje en la esquina inferior derecha "✅ producto agregado"
 function mostrarMensajeProductoAgregado(nombreProducto, imagenProducto) {
   const MENSAJE_ELEMENT = document.createElement('div');
   MENSAJE_ELEMENT.classList.add('producto-agregado-mensaje');
@@ -177,14 +177,14 @@ function listarProductosEnCarritoHTML(comida) {
 }
 
 
-// Función para remover un producto del carrito
+// Función para remover un producto del carrito (se crea un nuevo carrito excluyendo el producto que fue clickeado)
 function removerProducto(identificacion) {
   CARRITO = CARRITO.filter((producto) => producto.identificacion !== identificacion);
   localStorage.setItem('CarritoPrendas', JSON.stringify(CARRITO));
   armarCarrito();
 }
 
-// Funcion para agregar eventos de remover producto
+// Funcion para agregar evento masivo de remover producto
 function agregarEventosRemoverProducto() {
   const REMOVER_PRODUCTO_SPANS = document.querySelectorAll('.remover-producto');
   REMOVER_PRODUCTO_SPANS.forEach((span) => {
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
   agregarEventosRemoverProducto();
 });
 
-// Funcion para agregar botón para vaciar el carrito y comprar
+// Funcion para agregar botón HTML para vaciar el carrito y boton para comprar
 function agregarBotonVaciarCarritoYComprar() {
   return `
   <div class="cont-comprar-vaciar">
