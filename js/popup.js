@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const MOSTRAR_POPUP = sessionStorage.getItem('popupShown');
-
+// Condicional para que solamente aparezca 1 vez el popup por cada sesión abierta
   if (!MOSTRAR_POPUP) {
     setTimeout(() => {
       mostrarPopup();
