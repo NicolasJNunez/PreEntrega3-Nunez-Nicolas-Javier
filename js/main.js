@@ -2,48 +2,8 @@
 
 // ---------------------------------INDEX.HTML---------------------------------
 
-// Clase constructora de comidas
-class Comidas {
-  constructor(imagen, nombre, precio, categoria) {
-    this.identificacion = this.crearID();
-    this.imagen = imagen;
-    this.nombre = nombre;
-    this.precio = precio;
-    this.categoria = categoria;
-  }
-  crearID() {
-    let numero = parseInt(Math.random() * 10_000);
-    return numero;
-  }
-}
-
 // Array de objetos Comidas
-const ARRAY_DE_COMIDAS = [
-  new Comidas(`🍚`, `Arroz`, 500, `Cereales`),
-  new Comidas(`🍖`, `Carne`, 1600, `Carnes`),
-  new Comidas(`🥓`, `Bacon`, 1000, `Carnes`),
-  new Comidas(`🍜`, `Fideos`, 450, `Cereales`),
-  new Comidas(`🥛`, `Leche`, 600, `Lacteos`),
-  new Comidas(`🧀`, `Queso`, 1700, `Lacteos`),
-  new Comidas(`🍔`, `Hamburguesa`, 1200, `Fast Food`),
-  new Comidas(`🍕`, `Pizza`, 1500, `Fast Food`),
-  new Comidas(`🥗`, `Ensalada`, 800, `Vegetales`),
-  new Comidas(`🍓`, `Fresas`, 300, `Frutas`),
-  new Comidas(`🍗`, `Pollo`, 1200, `Carnes`),
-  new Comidas(`🥩`, `Bistec`, 1800, `Carnes`),
-  new Comidas(`🍟`, `Papas Fritas`, 700, `Acompañamientos`),
-  new Comidas(`🥪`, `Sandwich`, 900, `Bocadillos`),
-  new Comidas(`🥙`, `Kebab`, 1500, `Fast Food`),
-  new Comidas(`🌮`, `Taco`, 1000, `Fast Food`),
-  new Comidas(`🥟`, `Empanada`, 600, `Fast Food`),
-  new Comidas(`🍣`, `Sushi`, 2000, `Fast Food`),
-  new Comidas(`🍨`, `Helado`, 400, `Postres`),
-  new Comidas(`🍞`, `Pan`, 700, `Cereales`),
-  new Comidas(`🍰`, `Pastel de Chocolate`, 1200, `Postres`),
-  new Comidas(`🍪`, `Galletas`, 500, `Postres`),
-  new Comidas(`🍦`, `Helado de Vainilla`, 700, `Postres`),
-  new Comidas(`🍩`, `Donas`, 600, `Postres`)
-];
+const ARRAY_DE_COMIDAS = []
 
 // Función para devolver el mensaje de error de tarjetas
 function devolverCardError() {
@@ -51,9 +11,9 @@ function devolverCardError() {
           <h3 class ="intentelo">Lamentamos los inconvenientes técnicos</h3></div>`
 }
 
-// Función para crear una tarjeta de producto
 const CONTAINER = document.querySelector(`.contenedor`);
 
+// Función para crear una tarjeta de producto
 function crearCard(comida) {
   return `<div class="card">
   <div class="content">
@@ -61,8 +21,8 @@ function crearCard(comida) {
   <div class="price">$${comida.precio}</div>
   <div class="description">${comida.imagen}</div>
   </div>
-  <span>ID: ${comida.identificacion}</span>
-  <button class="button" id="${comida.identificacion}">Agregar al carrito</button>
+  <span>ID: ${comida.id}</span>
+  <button class="button" id="${comida.id}">Agregar al carrito</button>
           </div>`
 }
 
@@ -81,7 +41,7 @@ function activarClickEnBotones() {
   BOTONES.forEach((boton) => {
     boton.addEventListener(`click`, () => {
       let producto = ARRAY_DE_COMIDAS.find((comida) => {
-        return comida.identificacion === parseInt(boton.id);
+        return comida.id === parseInt(boton.id);
       });
       CARRITO.push(producto);
       localStorage.setItem(`CarritoPrendas`, JSON.stringify(CARRITO));
@@ -99,10 +59,19 @@ function activarClickEnBotones() {
   });
 }
 
-// Cargar productos en el contenedor y activar los eventos de click en los botones
+// Cargar productos en el contenedor (buscandolos en comidas.json) y activar los eventos de click en los botones
 if (CONTAINER) {
-  cargarProductos(ARRAY_DE_COMIDAS);
-  activarClickEnBotones();
+  fetch('js/comidas.json')
+    .then((response) => response.json())
+    .then((data) => {
+      ARRAY_DE_COMIDAS.push(...data);
+      cargarProductos(ARRAY_DE_COMIDAS);
+      activarClickEnBotones();
+    })
+    .catch((error) => {
+      console.error('Se ha producido un error', error);
+      CONTAINER.innerHTML = devolverCardError(); // Mostramos el mensaje de error en el contenedor
+    });
 }
 
 // Evento para actualizar el contador del carrito al cargar la página
@@ -170,7 +139,7 @@ function listarProductosEnCarritoHTML(comida) {
         ${esProductoConDescuento ? `<b>20% off</b><br><br><del>$${comida.precio.toLocaleString()}</del> $${precioConDescuento.toLocaleString()}` : `$${comida.precio.toLocaleString()}`}
       </td>
       <td>
-        <span class="remover-producto" data-id="${comida.identificacion}">❌</span>
+        <span class="remover-producto" data-id="${comida.id}">❌</span>
       </td>
     </tr>
   `;
@@ -179,7 +148,7 @@ function listarProductosEnCarritoHTML(comida) {
 
 // Función para remover un producto del carrito (se crea un nuevo carrito excluyendo el producto que fue clickeado)
 function removerProducto(identificacion) {
-  CARRITO = CARRITO.filter((producto) => producto.identificacion !== identificacion);
+  CARRITO = CARRITO.filter((producto) => producto.id !== identificacion);
   localStorage.setItem('CarritoPrendas', JSON.stringify(CARRITO));
   armarCarrito();
 }

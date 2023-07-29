@@ -245,6 +245,7 @@ main span {
   border-radius: 0.5rem;
   width: 90%;
   text-shadow: 0px 4px 18px #2c3442;
+  width: fit-content;
 }
 
 section {
@@ -490,4 +491,9 @@ footer h3 span {
 
 .sweet {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.swal2-confirm {
+  background-color: rgb(33 150 243) !important;
+  outline: 3px solid hsl(207, 90%, 74%) !important;
 }
