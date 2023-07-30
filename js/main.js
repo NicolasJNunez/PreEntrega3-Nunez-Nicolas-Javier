@@ -45,7 +45,6 @@ function activarClickEnBotones() {
       });
       CARRITO.push(producto);
       localStorage.setItem(`CarritoPrendas`, JSON.stringify(CARRITO));
-      console.table(CARRITO);
 
       if (CARRITO.length > 0) {
         CARRITO_CANTIDAD_ELEMENT.textContent = CARRITO.length.toString();
@@ -69,7 +68,6 @@ if (CONTAINER) {
       activarClickEnBotones();
     })
     .catch((error) => {
-      console.error('Se ha producido un error', error);
       CONTAINER.innerHTML = devolverCardError(); // Mostramos el mensaje de error en el contenedor
     });
 }
